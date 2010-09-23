@@ -3,16 +3,7 @@ require 'fileutils'
 require 'erb'
 
 def urls
-  {
-    'reevoo.com/home_page' => 'http://www.reevoo.com',
-    'reevoo.com/product_page/reviews_tab' => 'http://www.reevoo.com/p/nintendo-wii#/reviews',
-    'reevoo.com/product_page/expert_reviews_tab' => 'http://www.reevoo.com/p/nintendo-wii#/expert-reviews',
-    'reevoo.com/product_page/details_tab' => 'http://www.reevoo.com/p/nintendo-wii#/product-features',
-    'reevoo.com/product_page/offers_tab' => 'http://www.reevoo.com/p/nintendo-wii#/offers',
-    'reevoo.com/product_page/related_products_tab' => 'http://www.reevoo.com/p/nintendo-wii#/alternatives',
-    'reevoo.com/category_page' => 'http://www.reevoo.com/browse/product_type/televisions',
-    'mark/lightbox' => 'http://mark.reevoo.com/reevoomark/en-GB/product?sku=SONDSCW300&retailer=JSP&badge_style=imagescoresonly_sny104x82'
-  }
+  YAML.load(File.read('config/urls.yml'))
 end
 
 def images
