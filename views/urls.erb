@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>Screenshots</title>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/main.css' />
+  </head>
+  <body>
+    <h1>Screenshots</h1>
+    <%= erb :_navigation %>
+
+    <div class='edit'>
+      <% if defined? message %>
+        <p class='message'><%= message %></p>
+      <% end %>
+
+      <h2>URLs</h2>
+      <form method='post' action='/urls'>
+        <table>
+          <thead>
+            <tr>
+              <th scope='col'>Image folder</th>
+              <th scope='col'>URL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% urls.each do |path, url| %>
+              <tr>
+                <td><input type='text' name='path[]' value='<%= path %>' /></td>
+                <td><input type='text' name='url[]' value='<%= url %>' /></td>
+              </tr>
+            <% end %>
+            <% 3.times do %>
+              <tr>
+                <td><input type='text' name='path[]' /></td>
+                <td><input type='text' name='url[]' /></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div>
+          <button type='submit'>Save</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

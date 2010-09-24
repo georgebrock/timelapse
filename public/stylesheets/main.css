@@ -6,6 +6,10 @@ h1, h2, h3, h4, h5, h6 {
   margin:                 10px 0;
 }
 
+th {
+  text-align:             left;
+}
+
 a,
 button.link span {
   color:                  #1278db;
@@ -73,4 +77,11 @@ p.message {
 }
 .shot .missing {
   background:             #ccc;
+}
+
+.edit {
+  clear:                  both;
+}
+.edit input[type='text'] {
+  width:                  400px;
 }

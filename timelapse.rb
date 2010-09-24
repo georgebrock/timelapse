@@ -66,6 +66,17 @@ class Timelapse < Sinatra::Base
     erb :index
   end
 
+  get '/urls' do
+    erb :urls
+  end
+
+  post '/urls' do
+    urls, paths = params['url'].reject{|u| u.empty? }, params['path'].reject!{|p| p.empty? }
+    hash = Hash[*paths.zip(urls).flatten]
+    File.open('config/urls.yml', 'w'){|f| f << YAML.dump(hash) }
+    erb :urls, :locals => {:message => 'URLs saved!'}
+  end
+
   post '/take' do
     webkit2png = File.expand_path('../vendor/webkit2png', __FILE__)
     urls.each do |folder, url|
