@@ -30,7 +30,7 @@ end
 
 def render_images(images = images, heading_level = 2)
   images.inject('') do |html, (title, data)|
-    heading = "<h#{heading_level}>#{title.sub('_', ' ').capitalize}</h#{heading_level}>"
+    heading = "<h#{heading_level}>#{title.gsub('_', ' ').capitalize}</h#{heading_level}>"
 
     if data.keys.include?(:thumbs) and data[:thumbs].any?
       image_url = data[:thumbs].last.sub(/^.*public/, '')
