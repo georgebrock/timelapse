@@ -3,8 +3,14 @@ require 'fileutils'
 require 'erb'
 require 'yaml'
 
+URLS_PATH = 'config/urls.yml'
+
 def urls
-  YAML.load(File.read('config/urls.yml')).sort
+  if File.exists? URLS_PATH
+    YAML.load(File.read(URLS_PATH)).sort
+  else
+    {}
+  end
 end
 
 def images
@@ -73,7 +79,7 @@ class Timelapse < Sinatra::Base
   post '/urls' do
     urls, paths = params['url'].reject{|u| u.empty? }, params['path'].reject!{|p| p.empty? }
     hash = Hash[*paths.zip(urls).flatten]
-    File.open('config/urls.yml', 'w'){|f| f << YAML.dump(hash) }
+    File.open(URLS_PATH, 'w'){|f| f << YAML.dump(hash) }
     erb :urls, :locals => {:message => 'URLs saved!'}
   end
 
