@@ -6,12 +6,44 @@ h1, h2, h3, h4, h5, h6 {
   margin:                 10px 0;
 }
 
+a,
+button.link span {
+  color:                  #1278db;
+  text-decoration:        none;
+}
+a:hover,
+button.link:hover span {
+  text-decoration:        underline;
+}
+button.link {
+  text-align:             center;
+  background:             transparent;
+  border:                 none;
+  font-size:              inherit;
+  font-family:            inherit;
+  padding:                0;
+  margin:                 0;
+  cursor:                 pointer;
+}
+
 h1 {
   margin-top:             0;
-  float:                  left;
 }
-form.update {
-  float:                  right;
+
+.navigation {
+  position:               fixed;
+  margin:                 0;
+  top:                    0;
+  right:                  0;
+  background:             rgba(255,255,255, 0.5);
+  padding:                10px;
+  list-style:             none;
+}
+
+p.message {
+  color:                  #6ec148;
+  font-weight:            bold;
+  font-size:              1.5em;
 }
 
 .shot {
