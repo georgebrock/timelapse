@@ -1,0 +1,2 @@
+require "timelapse"
+run Timelapse
