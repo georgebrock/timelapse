@@ -1,2 +1,3 @@
 require "timelapse"
-run Timelapse
+use Timelapse
+run Rack::Directory.new("public")
