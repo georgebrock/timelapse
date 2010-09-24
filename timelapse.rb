@@ -67,18 +67,14 @@ class Timelapse < Sinatra::Base
   end
 
   post '/take' do
-    if `which webkit2png`.empty?
-      response.status = 500
-      "I can't find webkit2png! Check it's in your path"
-    else
-      urls.each do |folder, url|
-        output_path = File.join(File.dirname(__FILE__), 'public/images', folder)
-        FileUtils.mkdir_p output_path
+    webkit2png = File.expand_path('../vendor/webkit2png', __FILE__)
+    urls.each do |folder, url|
+      output_path = File.join(File.dirname(__FILE__), 'public/images', folder)
+      FileUtils.mkdir_p output_path
 
-        output_filename = File.join(output_path, DateTime.now.strftime('%F%H%M%S'))
-        system('webkit2png', '-F', '-W', '1024', '-o', output_filename, url)
-        system('webkit2png', '-T', '-W', '320', '-o', output_filename, url)
-      end
+      output_filename = File.join(output_path, DateTime.now.strftime('%F%H%M%S'))
+      system(webkit2png, '-F', '-W', '1024', '-o', output_filename, url)
+      system(webkit2png, '-T', '-W', '320', '-o', output_filename, url)
     end
     redirect '/'
   end
