@@ -4,7 +4,7 @@ require 'erb'
 require 'yaml'
 
 def urls
-  YAML.load(File.read('config/urls.yml'))
+  YAML.load(File.read('config/urls.yml')).sort
 end
 
 def images
