@@ -69,7 +69,11 @@ end
 
 class Timelapse < Sinatra::Base
   get '/' do
-    erb :index
+    if urls.any?
+      erb :index
+    else
+      erb :urls, :locals => {:message => 'Set up some URLs first'}
+    end
   end
 
   get '/urls' do
