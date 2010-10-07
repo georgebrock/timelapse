@@ -11,7 +11,16 @@ module Timelapse::Images
   end
 
   def self.update_urls!(hash)
+    validate_urls_and_paths(hash)
     File.open(URLS_PATH, 'w'){|f| f << YAML.dump(hash) }
+  end
+
+  def self.validate_urls_and_paths(hash)
+    hash.each do |path,url|
+      raise ArgumentError, 'URLs should start with "http://"' unless url =~ %r[^https?://]
+      raise ArgumentError, 'Paths should be relative, not absolute' if path =~ %r[^/]
+      raise ArgumentError, 'Paths may not ascent to parent directories' if path =~ %r[\.\.]
+    end
   end
 
   def self.images

@@ -13,6 +13,26 @@ class ConfigTest < Test::Unit::TestCase
       Timelapse::Images.update_urls! new_data
       assert_equal new_data.sort, Timelapse::Images.urls
     end
+
+    context 'when updating the URLs with invalid data' do
+      should 'reject invalid URLs' do
+        assert_raises(ArgumentError) do
+          Timelapse::Images.update_urls! 'invalid/url' => 'invalid!'
+        end
+      end
+
+      should 'reject absolute paths' do
+        assert_raises(ArgumentError) do
+          Timelapse::Images.update_urls! '/var' => 'http://www.example.com'
+        end
+      end
+
+      should 'reject paths that resolve to a parent directory' do
+        assert_raises(ArgumentError) do
+          Timelapse::Images.update_urls! '../../' => 'http://www.example.com'
+        end
+      end
+    end
   end
 
 end
