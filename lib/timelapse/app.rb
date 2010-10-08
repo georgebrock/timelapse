@@ -16,8 +16,12 @@ class Timelapse::App < Sinatra::Base
   post '/urls' do
     urls, paths = params['url'].reject{|u| u.empty? }, params['path'].reject!{|p| p.empty? }
     hash = Hash[*paths.zip(urls).flatten]
-    Timelapse::Images.update_urls! hash
-    erb :urls, :locals => {:message => 'URLs saved!'}
+    begin
+      Timelapse::Images.update_urls! hash
+      erb :urls, :locals => {:message => 'URLs saved!'}
+    rescue ArgumentError => e
+      erb :urls, :locals => {:message => "Oh noes! Something went wrong: #{e.message}"}
+    end
   end
 
   post '/take' do
