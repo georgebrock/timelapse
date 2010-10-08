@@ -27,8 +27,12 @@ var Timeline = (function() {
 
   var generateGUI = function() {
     var wrapper = $('<div/>').addClass('timeline-controls'),
-        slider = $('<div/>').addClass('slider');
-    wrapper.append(slider);
+        slider = $('<div/>').addClass('slider'),
+        labels = $('<div/>').addClass('labels');
+
+    wrapper
+      .append(slider)
+      .append(labels);
 
     $('body').append(wrapper);
     $('.timeline-controls .slider').slider({
@@ -48,6 +52,17 @@ var Timeline = (function() {
         }
       }
     });
+
+    tl.each(function(index) {
+      var left = Math.floor((this.timestamp - minTime) / (maxTime - minTime) * slider.width());
+
+      var label = $('<span/>')
+        .addClass('label')
+        .append(this.date.getDate() + '/' + (this.date.getMonth()+1) + '/' + (this.date.getFullYear()+'').substring(2))
+        .css('left', left+'px');
+
+      labels.append(label);
+    });
   };
 
   var tl = {
@@ -61,7 +76,7 @@ var Timeline = (function() {
     each: function(callback) {
       var i;
       for(i = 0; i < events.length; i++) {
-        callback.apply(events[i]);
+        callback.call(events[i], i);
       }
     }
 
