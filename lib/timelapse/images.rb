@@ -19,7 +19,7 @@ module Timelapse::Images
     hash.each do |path,url|
       raise ArgumentError, 'URLs should start with "http://"' unless url =~ %r[^https?://]
       raise ArgumentError, 'Paths should be relative, not absolute' if path =~ %r[^/]
-      raise ArgumentError, 'Paths may not ascent to parent directories' if path =~ %r[\.\.]
+      raise ArgumentError, 'Paths may not ascend to parent directories' if path =~ %r[\.\.]
     end
   end
 
