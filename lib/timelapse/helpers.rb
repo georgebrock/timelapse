@@ -17,7 +17,7 @@ module Timelapse::Helpers
         html + <<-HTML
           <div class='shot'>
             #{heading}
-            <a href='#{image_url.sub('thumb', 'full')}'>
+            <a href='shots/#{data[:path]}'>
               <img src='#{image_url}' alt='' />
             </a>
           </div>

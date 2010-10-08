@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <title>Screenshots</title>
+    <link rel='stylesheet' type='text/css' href='/stylesheets/main.css' />
+  </head>
+  <body>
+    <h1>Screenshots</h1>
+    <%= erb :_navigation %>
+
+    <div class='shots'>
+      <h2><%= title %></h2>
+      <ol class='timeline'>
+        <% images.each do |image| %>
+          <li class='event'>
+            <time datetime='<%= image[:date].strftime('%Y%m%dT%H%M%S%z') %>'><%= image[:date].strftime('%e %B %Y at %H:%M') %></time>
+            <img src='<%= image[:url] %>' alt='Screenshot of <%= title %> from <%= image[:date] %>' />
+          </li>
+        <% end %>
+      </ol>
+    </div>
+
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'></script>
+    <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
+    <script src='/javascripts/timeline.js'></script>
+  </body>
+</html>
