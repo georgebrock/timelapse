@@ -33,8 +33,8 @@ module Timelapse::Images
           image_subset[p] = {
             :url => url,
             :path => path,
-            :images => Dir["#{Timelapse::ROOT_PATH}/public/images/#{path}/*-full.png"].sort,
-            :thumbs => Dir["#{Timelapse::ROOT_PATH}/public/images/#{path}/*-thumb.png"].sort
+            :images => images_for_path(path, :full),
+            :thumbs => images_for_path(path, :thumb),
           }
         else
           image_subset[p] ||= {}
@@ -43,6 +43,10 @@ module Timelapse::Images
       end
     end
     images
+  end
+
+  def self.images_for_path(path, size)
+    Dir["#{Timelapse::ROOT_PATH}/public/images/#{path}/*-#{size}.png"].sort
   end
 
   def self.take_new_screenshots!
