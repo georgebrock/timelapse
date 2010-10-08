@@ -43,13 +43,14 @@ var Timeline = (function() {
             found = false,
             i;
 
+        var lastEvent = null;
         for(i = 0; i < events.length; i++) {
-          if(events[i].timestamp >= ts) {
-            $('.timeline .event').hide();
-            events[i].element.show();
-            return true;
+          if(events[i].timestamp <= ts) {
+            lastEvent = events[i];
           }
         }
+        $('.timeline .event').hide();
+        lastEvent.element.show();
       }
     });
 
